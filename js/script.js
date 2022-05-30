@@ -55,3 +55,25 @@ function prev(){
     index = (index - 1 + slides.length) % slides.length;
     slides[index].classList.add('active');
 }
+
+
+$(document).ready(function() {
+  //EXPANDIR EL MENU
+  $('.dashboard-nav-dropdown-toggle').click(function() {
+    var parent = $(this).parent();
+    if (parent.hasClass('show')) {
+      parent.removeClass('show');
+      localStorage.setItem("expandirMenu", "false");
+    } else {
+      parent.addClass('show');
+      localStorage.setItem("expandirMenu", "true");
+      localStorage.setItem("menuId", parent.attr('id'));
+    }
+  });
+
+  if (typeof localStorage.getItem('expandirMenu') !== 'undefined' && localStorage.getItem('expandirMenu') !== null) {
+    if (localStorage.getItem('expandirMenu') == "true") {
+      $('#' + localStorage.getItem('menuId')).addClass('show');
+    }
+  }
+});
